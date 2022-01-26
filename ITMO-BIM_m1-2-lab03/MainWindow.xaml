@@ -9,9 +9,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <Menu>
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Открыть" Click="MenuOpenItem_Click"/>
+                <MenuItem Header="_Сохранить" Click="MenuSaveItem_Click"/>
+                <MenuItem Header="_Закрыть" Click="MenuExitItem_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
             <ToolBar Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <ComboBox Width="150" Margin="5" Padding="3" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
                     <!--<ComboBoxItem Content="Arial"/>
@@ -54,6 +62,6 @@
                 </StackPanel>
             </ToolBar>
         </StackPanel>
-        <TextBox x:Name="textBox" Grid.Row="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="8" BorderBrush="#FF3A66EA" BorderThickness="2" FontSize="16" FontFamily="Arial" />
+        <TextBox x:Name="textBox" Grid.Row="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="8" BorderBrush="#FF3A66EA" BorderThickness="2" FontSize="16" FontFamily="Arial" />
     </Grid>
 </Window>

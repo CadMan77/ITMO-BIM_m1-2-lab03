@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+// Доработать проект текстового редактора (из задания 3), добавив главное меню. 
+//Главное меню должно содержать пункт «Файл» с подпунктами «Открыть», «Сохранить», «Закрыть». 
+//Добавить обработчики выбора пунктов меню.
 
 namespace ITMO_BIM_m1_2_lab03
 {
@@ -86,6 +92,25 @@ namespace ITMO_BIM_m1_2_lab03
         {
             if (textBox != null)
                 textBox.Foreground = new SolidColorBrush(Colors.Red);
+        }
+
+        private void MenuOpenItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ("Текстовые документы|*.txt|Все файлы|*.*");
+            if (ofd.ShowDialog() == true)
+                textBox.Text = File.ReadAllText(ofd.FileName);
+        }
+        private void MenuSaveItem_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = ("Текстовые документы|*.txt|Все файлы|*.*");
+            if (sfd.ShowDialog() == true)
+                File.WriteAllText(sfd.FileName, textBox.Text);
+        }
+        private void MenuExitItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
