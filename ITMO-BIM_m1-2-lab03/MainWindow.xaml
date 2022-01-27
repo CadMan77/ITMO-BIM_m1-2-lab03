@@ -5,35 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ITMO_BIM_m1_2_lab03"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="480">
+        Title="MainWindow" Height="200" Width="500" MinHeight="150" MinWidth="480">
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="FileOpenCmdExecuted"/>
+        <CommandBinding Command="Save" Executed="FileSaveCmdExecuted"/>
+        <CommandBinding Command="Close" Executed="ExitCmdExecuted"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="_Файл">
-                <MenuItem Header="_Открыть" Click="MenuOpenItem_Click"/>
-                <MenuItem Header="_Сохранить" Click="MenuSaveItem_Click"/>
-                <MenuItem Header="_Закрыть" Click="MenuExitItem_Click"/>
-            </MenuItem>
-        </Menu>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Файл">
+                    <!--<MenuItem Header="_Открыть" Click="MenuOpenItem_Click"/>
+                    <MenuItem Header="_Сохранить" Click="MenuSaveItem_Click"/>
+                    <MenuItem Header="_Закрыть" Click="MenuExitItem_Click"/>-->
+
+                    <MenuItem Header="Открыть" Command="Open"/>
+                    <MenuItem Header="Сохранить" Command="Save"/>
+                    <MenuItem Header="Выход" Command="Close"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <ToolBar Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <ComboBox Width="150" Margin="5" Padding="3" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
-                    <!--<ComboBoxItem Content="Arial"/>
+                <ComboBox Width="150" Margin="5" Padding="3" SelectedIndex="0" SelectionChanged="FontNameComboBox_SelectionChanged">
+                    <!--<ComboBoxItem Content="Arial" IsSelected="True"/>
                     <ComboBoxItem Content="Calibri"/>
                     <ComboBoxItem Content="Consolas"/>
                     <ComboBoxItem Content="Times New Roman"/>
                     <ComboBoxItem Content="Monotxt"/>-->
+                    
                     <TextBlock Text="Arial"/>
                     <TextBlock Text="Calibri"/>
                     <TextBlock Text="Consolas"/>
                     <TextBlock Text="Times New Roman"/>
                     <TextBlock Text="Monotxt"/>
                 </ComboBox>
-                <ComboBox Width="40" Margin="5" Padding="3" SelectedIndex="2" SelectionChanged="ComboBox_SelectionChanged_1">
+                <ComboBox Width="40" Margin="5" Padding="3" SelectedIndex="2" SelectionChanged="FontSizeComboBox_SelectionChanged">
                     <!--<ComboBoxItem Content="12"/>
                     <ComboBoxItem Content="14"/>
                     <ComboBoxItem Content="16"/>-->

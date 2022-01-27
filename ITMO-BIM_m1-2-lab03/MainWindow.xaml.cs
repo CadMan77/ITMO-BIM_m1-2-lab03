@@ -15,9 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-// Доработать проект текстового редактора (из задания 3), добавив главное меню. 
-//Главное меню должно содержать пункт «Файл» с подпунктами «Открыть», «Сохранить», «Закрыть». 
-//Добавить обработчики выбора пунктов меню.
+// Доработать проект текстового редактора (из задания 5)
+// заменить все обработчики событий нажатия пунктов меню командами
 
 namespace ITMO_BIM_m1_2_lab03
 {
@@ -31,16 +30,17 @@ namespace ITMO_BIM_m1_2_lab03
             InitializeComponent();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FontNameComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //string fontName = ((sender as ComboBox).SelectedItem.Content;
+            // string fontName = (sender as ComboBoxItem).Content.ToString(); // NULL-exception!!
             string fontName = ((sender as ComboBox).SelectedItem as TextBlock).Text;
             //MessageBox.Show(fontName);
             if (textBox != null)
                 textBox.FontFamily = new FontFamily(fontName);
+
         }
 
-        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void FontSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string fontSize = ((sender as ComboBox).SelectedItem as TextBlock).Text;
             if (textBox != null)
@@ -94,21 +94,42 @@ namespace ITMO_BIM_m1_2_lab03
                 textBox.Foreground = new SolidColorBrush(Colors.Red);
         }
 
-        private void MenuOpenItem_Click(object sender, RoutedEventArgs e)
+        //private void MenuOpenItem_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpenFileDialog ofd = new OpenFileDialog();
+        //    ofd.Filter = ("Текстовые документы|*.txt|Все файлы|*.*");
+        //    if (ofd.ShowDialog() == true)
+        //        textBox.Text = File.ReadAllText(ofd.FileName);
+        //}
+
+        private void FileOpenCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = ("Текстовые документы|*.txt|Все файлы|*.*");
             if (ofd.ShowDialog() == true)
                 textBox.Text = File.ReadAllText(ofd.FileName);
         }
-        private void MenuSaveItem_Click(object sender, RoutedEventArgs e)
+
+        //private void MenuSaveItem_Click(object sender, RoutedEventArgs e)
+        //{
+        //    SaveFileDialog sfd = new SaveFileDialog();
+        //    sfd.Filter = ("Текстовые документы|*.txt|Все файлы|*.*");
+        //    if (sfd.ShowDialog() == true)
+        //        File.WriteAllText(sfd.FileName, textBox.Text);
+        //}
+
+        private void FileSaveCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = ("Текстовые документы|*.txt|Все файлы|*.*");
             if (sfd.ShowDialog() == true)
                 File.WriteAllText(sfd.FileName, textBox.Text);
         }
-        private void MenuExitItem_Click(object sender, RoutedEventArgs e)
+        //private void MenuExitItem_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Application.Current.Shutdown();
+        //}
+        private void ExitCmdExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
